@@ -1,0 +1,52 @@
+def signin():
+    try:
+        username = input("Enter user name: ")
+        password = input("Enter password: ")
+
+        with open("country.txt" , "r") as file:
+            for line in file:
+                users, _ = line.strip().split("|")
+                print(users)
+                if username.lower() == users:
+                     print(f"Username '{username}' is not availabe try another.")
+                     return
+    except: 
+        pass 
+    
+    with open("country.txt" , "a") as file:
+        file.write(f"\n{username}|{password}")
+        print("Account created succesfully !")
+
+
+def login():
+    username = input("Enter user name: ")
+    password = input("Enter you password: ")
+    try:
+        with open("country.txt" , "r") as file:
+             for line in file:
+                user, pasword = line.strip().split("|")
+                if user == username and pasword == password :
+                    print("You are logged successfully. ...")
+                    break
+                else:
+                    print("Wrong username or password try again")
+                    break             
+    except :
+        print("Wronge username or password try again !")
+
+
+def main():
+    while True :
+        print("Menu\n1. register\n2. login\n3. logout")
+        choice = int(input("Your choice :"))
+        if choice == 1 : 
+            signin()
+        if choice == 2 :
+            login()
+        if choice == 3 :
+            print("Logging out ...")
+            break
+
+if __name__ == "__main__" :
+    main()
+
